@@ -13,7 +13,8 @@ class Paint {
     strokeWeight(3);
     if(outline) {
       stroke(c, opacity);
-    }
+      noFill();
+  }
     else {
       noStroke();
       fill(c, opacity);  
