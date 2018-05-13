@@ -9,8 +9,8 @@ char EASEL_MOOD_UP = 'd';
 char EASEL_MOOD_DOWN = 'e';
 char EASEL_WIDTH_UP = 'f';
 char EASEL_WIDTH_DOWN = 'g';
-char EASEL_OPACITY_UP = 'h';
-char EASEL_OPACITY_DOWN = 'i';
+char EASEL_OPACITY_UP = 'i';
+char EASEL_OPACITY_DOWN = 'h';
 char EASEL_CONTOUR_TOGGLE = 'c';
 char EASEL_BRUSH_UP = 'j';
 char EASEL_BRUSH_DOWN = 'k';
@@ -232,75 +232,81 @@ void drawInterface() {
   fill(0);
   //top bar
   //50
-  rect(0, height - MAX_WIDTH * 2.5, width, FONT_SIZE * 3 + 100);
+  if (height > 2900) {
+    rect(0, 2900, width, FONT_SIZE * 3 + 125);
+    rect(0, 2900, width - MAX_WIDTH * 4 + (PALETTE_OFFSET * 3), FONT_SIZE * 3 + 250);
+  } else {
+    rect(0, height - MAX_WIDTH * 2.5, width, FONT_SIZE * 3 + 100);
+    rect(0, height - MAX_WIDTH * 2.5, width - MAX_WIDTH * 4 + (PALETTE_OFFSET * 3), FONT_SIZE * 3 + 200);
+  }
   //padding bar
-  rect(0, height - MAX_WIDTH * 2.5, width - MAX_WIDTH * 4 + (PALETTE_OFFSET * 3) + 25, FONT_SIZE * 3 + 250);
   fill(255);
   textFont(bigText);
+  float brushY = height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2);
   switch (currentBrush) {
   case EASEL_BRUSH_STANDARD:
-    text("CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_STANDARD_SQUARE:
-    text("SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_OUTLINE:
-    text("CIRCLE OUTLINED", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("CIRCLE OUTLINED", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_OUTLINE:
-    text("FIVE POINT HORIZONTAL OUTLINED CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL OUTLINED CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS:
-    text("FIVE POINT HORIZONTAL CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS:
-    text("FIVE POINT VERTICAL CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE:
-    text("FIVE POINT VERTICAL OUTLINED CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL OUTLINED CIRCLE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER:
-    text("SPLATTER CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SPLATTER CIRCLE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER_OUTLINE:
-    text("SPLATTER OUTLINED CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SPLATTER OUTLINED CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_GRAFFITI:
-    text("CIRCLE GRAFFITI", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("CIRCLE GRAFFITI", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_MOTION:
-    text("FIVE POINT MOVING CIRCLE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT MOVING CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_OUTLINE_SQUARE:
-    text("SQUARE OUTLINED", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SQUARE OUTLINED", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_OUTLINE_SQUARE:
-    text("FIVE POINT HORIZONTAL OUTLINED SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL OUTLINED SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_SQUARE:
-    text("FIVE POINT HORIZONTAL SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS_SQUARE:
-    text("FIVE POINT VERTICAL SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE_SQUARE:
-    text("FIVE POINT VERTICAL OUTLINED SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL OUTLINED SQUARE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER_SQUARE:
-    text("SPLATTER SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SPLATTER SQUARE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER_OUTLINE_SQUARE:
-    text("SPLATTER OUTLINED SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SPLATTER OUTLINED SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_GRAFFITI_SQUARE:
-    text("SQUARE GRAFFITI", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("SQUARE GRAFFITI", 20,brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_MOTION_SQUARE:
-    text("FIVE POINT MOVING SQUARE", 20, height - MAX_WIDTH * 2.1 + (FONT_SIZE * 2));
+    text("FIVE POINT MOVING SQUARE", 20, brushY);
     break;
 
 
@@ -313,7 +319,8 @@ void draw() {
   drawInterface();
 }
 void mousePressed() {
-  if (!moods[currentMood].didMakeSelection(mouseX, mouseY)) {
+  if (moods[currentMood].didMakeSelection(mouseX, mouseY)) {
+    drawCurrentBrush();
   }
 }
 
@@ -521,38 +528,7 @@ void mouseDragged() {
   }
 }
 
-void keyPressed() {
-  rectMode(CORNER);
-  if (key == EASEL_BG_TOGGLE) {
-    fill(255);
-    rect(0, 0, width, height - MAX_WIDTH);
-    image(backgroundImage[currentBackgroundImage], 0, 0);
-    showBackgroundImage = true;
-    showContours = false;
-  }
-
-
-  if (key == EASEL_CONTOUR_TOGGLE) {
-    fill(255);
-    rect(0, 0, width, height - MAX_WIDTH);
-
-    image(thresholdImage[currentBackgroundImage], 0, 0);
-    showContours = true;
-    showBackgroundImage = false;
-  }
-
-  if (key == EASEL_SCREENSHOT) {
-    saveArt();
-  }
-
-
-  if (key == EASEL_BG_IMAGE_UP) {
-    if (currentBackgroundImage < backgroundImage.length  - 1) {
-      currentBackgroundImage++;
-    } else {
-      currentBackgroundImage = 0;
-    }
-
+void drawBackground() {
     fill(255);
     if (showBackgroundImage) {
       rect(0, 0, width, height-MAX_WIDTH);
@@ -562,6 +538,30 @@ void keyPressed() {
       rect(0, 0, width, height-MAX_WIDTH);
       image(thresholdImage[currentBackgroundImage], 0, 0);
     }
+  
+}
+
+void keyPressed() {
+  rectMode(CORNER);
+  if (key == EASEL_BG_TOGGLE) {
+    showBackgroundImage = true;
+    showContours = false;
+    drawBackground();
+}
+
+  if (key == EASEL_CONTOUR_TOGGLE) {
+    showContours = true;
+    showBackgroundImage = false;
+    drawBackground();
+}
+
+  if (key == EASEL_BG_IMAGE_UP) {
+    if (currentBackgroundImage < backgroundImage.length  - 1) {
+      currentBackgroundImage++;
+    } else {
+      currentBackgroundImage = 0;
+    }
+    drawBackground();
   }
 
 
@@ -571,16 +571,8 @@ void keyPressed() {
     } else {
       currentBackgroundImage--;
     }
-    fill(255);
-    if (showBackgroundImage) {
-      rect(0, 0, width, height-MAX_WIDTH);
-      image(backgroundImage[currentBackgroundImage], 0, 0);
-    }
-    if (showContours) {
-      rect(0, 0, width, height-MAX_WIDTH);
-      image(thresholdImage[currentBackgroundImage], 0, 0);
-    }
-  }
+    drawBackground();
+}
 
 
   if (key == EASEL_WIDTH_UP) {
@@ -589,7 +581,6 @@ void keyPressed() {
     } else {
       currentWidth+=5;
     }
-    drawCurrentBrush();
   }
 
   if (key == EASEL_WIDTH_DOWN) {
@@ -617,7 +608,6 @@ void keyPressed() {
     } else {
       currentOpacity-=2;
     }
-    drawCurrentBrush();
   }
 
   if (key == EASEL_MOOD_DOWN) {
@@ -642,7 +632,6 @@ void keyPressed() {
     } else {
       currentBrush--;
     }
-    drawCurrentBrush();
   }
 
   if (key == EASEL_BRUSH_UP) {
@@ -651,13 +640,18 @@ void keyPressed() {
     } else {
       currentBrush++;
     }
-    drawCurrentBrush();
   }
+    if (key == EASEL_SCREENSHOT) {
+      saveArt();
+    }
+    else {
+      drawCurrentBrush();
+    }
 }
 
 void saveArt() {
   rectMode(CORNER);
-  PImage screenshot = get(0, 0, width, 2700);
+  PImage screenshot = get(0, 0, width, 2900);
   String g_drive = "C:/Drive/Easel/";
   screenshot.save(g_drive + "art-" + currentScreenshot + ".jpg");
   currentScreenshot++;
@@ -666,22 +660,32 @@ void saveArt() {
   rect(0, height - MAX_WIDTH * 2, width - MAX_WIDTH * 5 + (PALETTE_OFFSET * 4), (MAX_WIDTH*2));
   rect(0, height - MAX_WIDTH * 2, width, MAX_WIDTH * 2);
   fill(255);
+  textFont(text, 40);
+  text("YOUR ART HAS BEEN SAVED!", 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 10));
   textFont(text);
-  text("YOUR ART HAS BEEN SAVED", 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 10));
-  text("Please visit " + PHOTO_URL, 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 12));
-  text("to retrieve it", 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 13.1));
+  text("Please visit " + PHOTO_URL + " to retrieve", 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 12));
+  text("it or scan this QR code.", 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 13.1));
+
   image(qr, MAX_WIDTH/2 - 50, height - MAX_WIDTH);
 }
 
 void drawCurrentBrush() {
   fill(255);
   noStroke();
-  float belowPaddingY = height - MAX_WIDTH * 3 - 70 + (FONT_SIZE * 3 + 500);
-  rect(0, belowPaddingY, MAX_WIDTH*3 + PALETTE_OFFSET, height - belowPaddingY); //height
-  
+  float belowPaddingY;
+  int x;
+  if (height > 2900) {
+    x = MAX_WIDTH/2;
+    belowPaddingY = 2900 + FONT_SIZE * 3 + 250; //size of black padding
+    rect(0, belowPaddingY, MAX_WIDTH*3, height - belowPaddingY); //height
+  } else {
+    x = MAX_WIDTH;
+    belowPaddingY = height - MAX_WIDTH * 3 - 70 + (FONT_SIZE * 3 + 500); 
+    rect(0, belowPaddingY, MAX_WIDTH*3 + PALETTE_OFFSET, height - belowPaddingY); //height
+  }
+
   //below padding
-  
-  int x = width - MAX_WIDTH * 5 + (PALETTE_OFFSET * 4) - MAX_WIDTH*2;
+
   int y = height - MAX_WIDTH;
   p = new Paint(x, y);
   p.c = moods[currentMood].currentColor;

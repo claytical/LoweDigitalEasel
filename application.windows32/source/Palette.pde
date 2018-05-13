@@ -4,7 +4,6 @@ class Palette {
   color currentColor;
   String title;
   int selected;
-  int y;
   int w;
   int h;
 
@@ -18,12 +17,12 @@ class Palette {
   }
   
   void draw() {
-    for (int i = 0; i < colors.length - 1; i++) {
+    for (int i = 0; i < colors.length; i++) {
       noStroke();
       fill(255);      
       rect(positions[i].x, positions[i].y, w, h);
       fill(colors[i]);
-      rect(positions[i].x, positions[i].y, w, h);
+      rect(positions[i].x, positions[i].y, w, h, PALETTE_OFFSET);
     }
   }
 
@@ -39,6 +38,7 @@ class Palette {
     colors[2] = c3;
     colors[3] = c4;
     colors[4] = c5;
+    currentColor = colors[0];
   }
   
   boolean didMakeSelection(int touchX, int touchY) {

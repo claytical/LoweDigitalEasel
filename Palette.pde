@@ -22,7 +22,7 @@ class Palette {
       fill(255);      
       rect(positions[i].x, positions[i].y, w, h);
       fill(colors[i]);
-      rect(positions[i].x, positions[i].y, w, h);
+      rect(positions[i].x, positions[i].y, w, h, PALETTE_OFFSET);
     }
   }
 
