@@ -38,10 +38,11 @@ class Palette {
     colors[2] = c3;
     colors[3] = c4;
     colors[4] = c5;
+    currentColor = colors[0];
   }
   
   boolean didMakeSelection(int touchX, int touchY) {
-    for (int i = 0; i < positions.length - 1; i++) {
+    for (int i = 0; i < positions.length; i++) {
       if(touchX >= positions[i].x && touchX <= positions[i].x + w && touchY >= positions[i].y && touchY <= positions[i].y + h) {
         currentColor = colors[i];
         return true;
