@@ -102,8 +102,11 @@ void setMoods() {
     new PVector(width - MAX_WIDTH * 3 + (PALETTE_OFFSET * 2), height - MAX_WIDTH), 
     new PVector(width - MAX_WIDTH * 4 + (PALETTE_OFFSET * 3), height - (MAX_WIDTH * 2) - 75), //TOP
     new PVector(width - MAX_WIDTH * 5 + (PALETTE_OFFSET * 4), height - MAX_WIDTH));
+
+
   mood.setResolution(MAX_WIDTH, MAX_WIDTH+75);
   mood.setColors(color(186, 145, 209), color(98, 134, 84), color(203, 255, 255), color(89, 154, 158), color(229, 205, 78));
+
   moods[0] = mood;
 
   mood = new Palette(new PVector(width - MAX_WIDTH, height - MAX_WIDTH), 
@@ -652,7 +655,8 @@ void keyPressed() {
 void saveArt() {
   rectMode(CORNER);
   PImage screenshot = get(0, 0, width, 2900);
-  String g_drive = "C:/Drive/Easel/";
+//  String g_drive = "C:/Drive/Easel/";
+  String g_drive = "C:/Users/lowe/Google Drive/Easel/";
   screenshot.save(g_drive + "art-" + currentScreenshot + ".jpg");
   currentScreenshot++;
 
@@ -677,7 +681,16 @@ void drawCurrentBrush() {
   if (height > 2900) {
     x = MAX_WIDTH/2;
     belowPaddingY = 2900 + FONT_SIZE * 3 + 250; //size of black padding
-    rect(0, belowPaddingY, MAX_WIDTH*3, height - belowPaddingY); //height
+//    belowPaddingY = height - MAX_WIDTH * 3 - 70 + (FONT_SIZE * 3 + 500); 
+
+ // top closest swatch
+//    new PVector(, ), //TOP
+  
+// closest swatch color  
+  //    new PVector(, height - MAX_WIDTH));
+    rect(0, belowPaddingY, width - MAX_WIDTH * 4 + (PALETTE_OFFSET * 3), height - (MAX_WIDTH * 2) - 75);
+    rect(0, belowPaddingY + height - (MAX_WIDTH * 2) - 75, width - MAX_WIDTH * 5 + (PALETTE_OFFSET * 4), height - belowPaddingY + height - (MAX_WIDTH * 2) - 75);
+//    rect(0, belowPaddingY, MAX_WIDTH*3, height - belowPaddingY); //height
   } else {
     x = MAX_WIDTH;
     belowPaddingY = height - MAX_WIDTH * 3 - 70 + (FONT_SIZE * 3 + 500); 
