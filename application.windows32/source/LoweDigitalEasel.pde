@@ -242,70 +242,71 @@ void drawInterface() {
   //padding bar
   fill(255);
   textFont(bigText);
+  float brushY = height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2);
   switch (currentBrush) {
   case EASEL_BRUSH_STANDARD:
-    text("CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_STANDARD_SQUARE:
-    text("SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_OUTLINE:
-    text("CIRCLE OUTLINED", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("CIRCLE OUTLINED", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_OUTLINE:
-    text("FIVE POINT HORIZONTAL OUTLINED CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL OUTLINED CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS:
-    text("FIVE POINT HORIZONTAL CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS:
-    text("FIVE POINT VERTICAL CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE:
-    text("FIVE POINT VERTICAL OUTLINED CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL OUTLINED CIRCLE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER:
-    text("SPLATTER CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SPLATTER CIRCLE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER_OUTLINE:
-    text("SPLATTER OUTLINED CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SPLATTER OUTLINED CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_GRAFFITI:
-    text("CIRCLE GRAFFITI", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("CIRCLE GRAFFITI", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_MOTION:
-    text("FIVE POINT MOVING CIRCLE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT MOVING CIRCLE", 20, brushY);
     break;
   case EASEL_BRUSH_OUTLINE_SQUARE:
-    text("SQUARE OUTLINED", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SQUARE OUTLINED", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_OUTLINE_SQUARE:
-    text("FIVE POINT HORIZONTAL OUTLINED SQUARE", 20, height - MAX_WIDTH * 2 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL OUTLINED SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_SQUARE:
-    text("FIVE POINT HORIZONTAL SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT HORIZONTAL SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS_SQUARE:
-    text("FIVE POINT VERTICAL SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE_SQUARE:
-    text("FIVE POINT VERTICAL OUTLINED SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT VERTICAL OUTLINED SQUARE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER_SQUARE:
-    text("SPLATTER SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SPLATTER SQUARE", 20, brushY);
     break;
 
   case EASEL_BRUSH_SPLATTER_OUTLINE_SQUARE:
-    text("SPLATTER OUTLINED SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SPLATTER OUTLINED SQUARE", 20, brushY);
     break;
   case EASEL_BRUSH_GRAFFITI_SQUARE:
-    text("SQUARE GRAFFITI", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("SQUARE GRAFFITI", 20,brushY);
     break;
   case EASEL_BRUSH_FIVE_X_AXIS_MOTION_SQUARE:
-    text("FIVE POINT MOVING SQUARE", 20, height - MAX_WIDTH * 2.2 + (FONT_SIZE * 2));
+    text("FIVE POINT MOVING SQUARE", 20, brushY);
     break;
 
 
@@ -527,38 +528,7 @@ void mouseDragged() {
   }
 }
 
-void keyPressed() {
-  rectMode(CORNER);
-  if (key == EASEL_BG_TOGGLE) {
-    fill(255);
-    rect(0, 0, width, height - MAX_WIDTH);
-    image(backgroundImage[currentBackgroundImage], 0, 0);
-    showBackgroundImage = true;
-    showContours = false;
-  }
-
-
-  if (key == EASEL_CONTOUR_TOGGLE) {
-    fill(255);
-    rect(0, 0, width, height - MAX_WIDTH);
-
-    image(thresholdImage[currentBackgroundImage], 0, 0);
-    showContours = true;
-    showBackgroundImage = false;
-  }
-
-  if (key == EASEL_SCREENSHOT) {
-    saveArt();
-  }
-
-
-  if (key == EASEL_BG_IMAGE_UP) {
-    if (currentBackgroundImage < backgroundImage.length  - 1) {
-      currentBackgroundImage++;
-    } else {
-      currentBackgroundImage = 0;
-    }
-
+void drawBackground() {
     fill(255);
     if (showBackgroundImage) {
       rect(0, 0, width, height-MAX_WIDTH);
@@ -568,6 +538,30 @@ void keyPressed() {
       rect(0, 0, width, height-MAX_WIDTH);
       image(thresholdImage[currentBackgroundImage], 0, 0);
     }
+  
+}
+
+void keyPressed() {
+  rectMode(CORNER);
+  if (key == EASEL_BG_TOGGLE) {
+    showBackgroundImage = true;
+    showContours = false;
+    drawBackground();
+}
+
+  if (key == EASEL_CONTOUR_TOGGLE) {
+    showContours = true;
+    showBackgroundImage = false;
+    drawBackground();
+}
+
+  if (key == EASEL_BG_IMAGE_UP) {
+    if (currentBackgroundImage < backgroundImage.length  - 1) {
+      currentBackgroundImage++;
+    } else {
+      currentBackgroundImage = 0;
+    }
+    drawBackground();
   }
 
 
@@ -577,16 +571,8 @@ void keyPressed() {
     } else {
       currentBackgroundImage--;
     }
-    fill(255);
-    if (showBackgroundImage) {
-      rect(0, 0, width, height-MAX_WIDTH);
-      image(backgroundImage[currentBackgroundImage], 0, 0);
-    }
-    if (showContours) {
-      rect(0, 0, width, height-MAX_WIDTH);
-      image(thresholdImage[currentBackgroundImage], 0, 0);
-    }
-  }
+    drawBackground();
+}
 
 
   if (key == EASEL_WIDTH_UP) {
@@ -595,7 +581,6 @@ void keyPressed() {
     } else {
       currentWidth+=5;
     }
-    drawCurrentBrush();
   }
 
   if (key == EASEL_WIDTH_DOWN) {
@@ -623,7 +608,6 @@ void keyPressed() {
     } else {
       currentOpacity-=2;
     }
-    drawCurrentBrush();
   }
 
   if (key == EASEL_MOOD_DOWN) {
@@ -648,7 +632,6 @@ void keyPressed() {
     } else {
       currentBrush--;
     }
-    drawCurrentBrush();
   }
 
   if (key == EASEL_BRUSH_UP) {
@@ -657,8 +640,13 @@ void keyPressed() {
     } else {
       currentBrush++;
     }
-    drawCurrentBrush();
   }
+    if (key == EASEL_SCREENSHOT) {
+      saveArt();
+    }
+    else {
+      drawCurrentBrush();
+    }
 }
 
 void saveArt() {
