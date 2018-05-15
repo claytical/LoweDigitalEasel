@@ -17,23 +17,26 @@ char EASEL_BRUSH_DOWN = 'k';
 char EASEL_SCREENSHOT = 'z';
 public static final int EASEL_BRUSH_STANDARD = 0;
 public static final int EASEL_BRUSH_OUTLINE = 1;
-public static final int EASEL_BRUSH_FIVE_X_AXIS = 2;
-public static final int EASEL_BRUSH_FIVE_X_AXIS_OUTLINE = 3;
-public static final int EASEL_BRUSH_FIVE_Y_AXIS = 4;
-public static final int EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE = 5;
-public static final int EASEL_BRUSH_SPLATTER = 6;
-public static final int EASEL_BRUSH_SPLATTER_OUTLINE = 7;
-public static final int EASEL_BRUSH_GRAFFITI = 8;
-public static final int EASEL_BRUSH_FIVE_X_AXIS_MOTION = 9;
-public static final int EASEL_BRUSH_STANDARD_SQUARE = 10;
-public static final int EASEL_BRUSH_OUTLINE_SQUARE = 11;
-public static final int EASEL_BRUSH_FIVE_X_AXIS_SQUARE = 12;
-public static final int EASEL_BRUSH_FIVE_X_AXIS_OUTLINE_SQUARE = 13;
-public static final int EASEL_BRUSH_FIVE_Y_AXIS_SQUARE = 14;
-public static final int EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE_SQUARE = 15;
-public static final int EASEL_BRUSH_SPLATTER_SQUARE = 16;
-public static final int EASEL_BRUSH_SPLATTER_OUTLINE_SQUARE = 17;
-public static final int EASEL_BRUSH_GRAFFITI_SQUARE = 18;
+public static final int EASEL_BRUSH_STANDARD_SQUARE = 2;
+public static final int EASEL_BRUSH_OUTLINE_SQUARE = 3;
+
+public static final int EASEL_BRUSH_FIVE_X_AXIS = 4;
+public static final int EASEL_BRUSH_FIVE_X_AXIS_OUTLINE = 5;
+public static final int EASEL_BRUSH_FIVE_X_AXIS_SQUARE = 6;
+public static final int EASEL_BRUSH_FIVE_X_AXIS_OUTLINE_SQUARE = 7;
+
+public static final int EASEL_BRUSH_FIVE_Y_AXIS = 8;
+public static final int EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE = 9;
+public static final int EASEL_BRUSH_FIVE_Y_AXIS_SQUARE = 10;
+public static final int EASEL_BRUSH_FIVE_Y_AXIS_OUTLINE_SQUARE = 11;
+
+public static final int EASEL_BRUSH_SPLATTER = 12;
+public static final int EASEL_BRUSH_SPLATTER_OUTLINE = 13;
+public static final int EASEL_BRUSH_SPLATTER_SQUARE = 14;
+public static final int EASEL_BRUSH_SPLATTER_OUTLINE_SQUARE = 15;
+public static final int EASEL_BRUSH_GRAFFITI = 16;
+public static final int EASEL_BRUSH_GRAFFITI_SQUARE = 17;
+public static final int EASEL_BRUSH_FIVE_X_AXIS_MOTION = 18;
 public static final int EASEL_BRUSH_FIVE_X_AXIS_MOTION_SQUARE = 19;
 
 public static final int MAX_WIDTH = 360;
@@ -63,6 +66,8 @@ PImage qr;
 boolean showBackgroundImage;
 boolean showContours;
 
+boolean movingBrush;
+
 
 
 void setup() {
@@ -88,6 +93,7 @@ void setup() {
   currentMood = 0;
   currentBrush = 0;
   currentScreenshot = 0;
+  movingBrush = false;
 
   fill(255);
   rect(0, 0, width, height);
@@ -231,6 +237,9 @@ void setMoods() {
 void drawInterface() {
   rectMode(CORNER);
   moods[currentMood].draw();
+  if(movingBrush) {
+    drawCurrentBrush();
+  }
   noStroke();
   fill(0);
   //top bar
@@ -320,6 +329,7 @@ void drawInterface() {
 
 void draw() {
   drawInterface();
+  
 }
 void mousePressed() {
   if (moods[currentMood].didMakeSelection(mouseX, mouseY)) {
@@ -628,6 +638,8 @@ void keyPressed() {
       currentMood++;
     }
   }
+  
+ 
 
   if (key == EASEL_BRUSH_DOWN) {
     if (currentBrush <= 0) {
@@ -635,7 +647,8 @@ void keyPressed() {
     } else {
       currentBrush--;
     }
-  }
+    checkForMovingBrush();
+}
 
   if (key == EASEL_BRUSH_UP) {
     if (currentBrush >= EASEL_BRUSH_FIVE_X_AXIS_MOTION_SQUARE) {
@@ -643,6 +656,7 @@ void keyPressed() {
     } else {
       currentBrush++;
     }
+    checkForMovingBrush();
   }
     if (key == EASEL_SCREENSHOT) {
       saveArt();
@@ -652,6 +666,22 @@ void keyPressed() {
     }
 }
 
+void checkForMovingBrush() {
+     if(currentBrush == EASEL_BRUSH_SPLATTER || 
+      currentBrush == EASEL_BRUSH_SPLATTER_OUTLINE ||
+      currentBrush == EASEL_BRUSH_SPLATTER_SQUARE || 
+      currentBrush == EASEL_BRUSH_SPLATTER_OUTLINE_SQUARE || 
+      currentBrush == EASEL_BRUSH_GRAFFITI || 
+      currentBrush == EASEL_BRUSH_GRAFFITI_SQUARE || 
+      currentBrush == EASEL_BRUSH_FIVE_X_AXIS_MOTION || 
+      currentBrush == EASEL_BRUSH_FIVE_X_AXIS_MOTION_SQUARE) {
+      movingBrush = true;
+  }
+  else {
+      movingBrush = false;
+   }
+ 
+}
 void saveArt() {
   rectMode(CORNER);
   PImage screenshot = get(0, 0, width, 2900);
